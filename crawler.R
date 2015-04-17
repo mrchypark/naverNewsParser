@@ -36,6 +36,8 @@ while(len!=lennow){
 list01<-gsub('<a href=\"','',list01)
 list01<-gsub('\">','',list01)
 list01<-substr(list01,1,108)
+list01<-list01[-grep("hot",list01)]
+list01<-list01[-grep("endic",list01)]
 write.csv(list01,"list01.csv",row.names=F)
 
 print(length(list01))
@@ -73,6 +75,8 @@ while(len!=lennow){
 list02<-gsub('<a href=\"','',list02)
 list02<-gsub('\">','',list02)
 list02<-substr(list02,1,108)
+list02<-list02[-grep("hot",list02)]
+list02<-list02[-grep("endic",list02)]
 write.csv(list02,"list02.csv",row.names=F)
 
 print(length(list02))
@@ -110,6 +114,8 @@ while(len!=lennow){
 list03<-gsub('<a href=\"','',list03)
 list03<-gsub('\">','',list03)
 list03<-substr(list03,1,108)
+list03<-list03[-grep("hot",list03)]
+list03<-list03[-grep("endic",list03)]
 write.csv(list03,"list03.csv",row.names=F)
 
 print(length(list03))
@@ -147,6 +153,8 @@ while(len!=lennow){
 list04<-gsub('<a href=\"','',list04)
 list04<-gsub('\">','',list04)
 list04<-substr(list04,1,108)
+list04<-list01[-grep("hot",list04)]
+list04<-list01[-grep("endic",list04)]
 write.csv(list04,"list04.csv",row.names=F)
 
 print(length(list04))
@@ -184,6 +192,8 @@ while(len!=lennow){
 list05<-gsub('<a href=\"','',list05)
 list05<-gsub('\">','',list05)
 list05<-substr(list05,1,108)
+list05<-list05[-grep("hot",list05)]
+list05<-list05[-grep("endic",list05)]
 write.csv(list05,"list05.csv",row.names=F)
 
 print(length(list05))
@@ -221,6 +231,8 @@ while(len!=lennow){
 list06<-gsub('<a href=\"','',list06)
 list06<-gsub('\">','',list06)
 list06<-substr(list06,1,108)
+list06<-list06[-grep("hot",list06)]
+list06<-list06[-grep("endic",list06)]
 write.csv(list06,"list06.csv",row.names=F)
 
 print(length(list06))
@@ -353,6 +365,55 @@ dd<-length(list07)
       chgTime<-gsub("최종수정", "", chgTime)
       chgTime<-gsub(" ", "", chgTime)
       chgTime<-paste0(substr(chgTime,1,4),"-",substr(chgTime,5,6),"-",substr(chgTime,7,8)," ",substr(chgTime,9,10),":",substr(chgTime,11,12))
+      }else{chgTime<-postTime}
+    con<-gsub("\t","",con)
+    con<-gsub("<!--(([^-]*)|([-]{1})|([-]{2})([^>]{1}))*?-->","",con)
+    con<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",con)
+    con<-paste(con, collapse = "")
+
+    listTem<-data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con)
+    list<-rbind(list,listTem)
+
+Sys.sleep(0.5)
+print(paste(i,j,j/dd,"%"))
+}
+
+
+list<-data.frame(category=8,title="test",author="test",postTime="time",chgTime="time",contents="test")
+  dd<-length(list05)
+  for(j in 1:dd){
+    tt<-as.character(list05[j])
+    tst<-readLines(tt,warn=F)
+
+    tst<-gsub('&nbsp;',"",tst)
+    tst<-gsub('&lt;',"<",tst)
+    tst<-gsub('&gt;',">",tst)
+    tst<-gsub('&amp;',"&",tst)
+    tst<-gsub('&quot;','"',tst)
+
+    cate<-tst[grep(":category2",tst)]
+    title<-tst[grep("og:title",tst)]
+    author<-tst[grep(":author",tst)]
+    postTime<-tst[grep("기사입력",tst)]
+    chgTime<-tst[grep("최종수정",tst)]
+    if(length(grep("본문 내용",tst))>1){
+    con<-tst[grep("본문 내용",tst)[1]:grep("본문 내용",tst)[2]]}else{
+    con<-tst[grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)[ grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)>grep("본문 내용",tst)][1]]}
+
+    cate<-gsub("[^(가-힣ㄱ-ㅎㅏ-ㅣ)]","",cate)
+    title<-gsub('<meta property=\"og:title\"\t\t\tcontent=\"',"",title)
+    title<-gsub('\"/>',"",title)
+    author<-gsub('<meta property=\"og:article:author\"\tcontent=\"',"",author)
+    author<-gsub('\"/>',"",author)
+    author<-gsub(" 네이버 뉴스","",author)
+    author<-gsub("[[:punct:]]", "", author)
+    author<-gsub(" ", "", author)
+    postTime<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",postTime)
+    postTime<-gsub("기사입력 ","",postTime)
+    if (length(chgTime)!=0){
+      chgTime<-gsub("\t","",chgTime)
+      chgTime<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",chgTime)
+      chgTime<-gsub("최종수정 ","",chgTime)
       }else{chgTime<-postTime}
     con<-gsub("\t","",con)
     con<-gsub("<!--(([^-]*)|([-]{1})|([-]{2})([^>]{1}))*?-->","",con)
