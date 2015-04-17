@@ -20,7 +20,7 @@
 <br>
 This source code is to parse naver news in Korea.<br>
 As you can see this code is by R.<br>
-Naver news categories are 7(politics,economy,sociaty,culture,world news, IT/sceince, sports).<br>
+Naver news categories are 7(politics, economy, society, culture, world news, IT/science, sports).<br>
 Always welcome your participation.<br>
 
 
