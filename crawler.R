@@ -327,7 +327,6 @@ print(paste(i,j,j/dd,"%"))
 
 
 list<-data.frame(category=8,title="test",author="test",postTime="time",chgTime="time",contents="test")
-i<-7
 dd<-length(list07)
   for(j in 1:dd){
     tt<-list07[j]
