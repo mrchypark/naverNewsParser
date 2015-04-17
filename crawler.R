@@ -8,13 +8,14 @@ for(j in 0:1095){
     # 날짜 2012년 1월 1일 부터 +1095일까지
     dd<-as.Date(j, origin = "2012-01-01")
     kk<-gsub('-',"",as.character(dd))
-    
+    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
 while(len!=lennow){
   
   len<-lennow
+  # 네이버 정치면 주소
   test<-eval(parse(text=paste0("readLines('http://news.naver.com/main/list.nhn?sid2=269&sid1=100&mid=shm&mode=LS2D&date=",kk,"&page=",i,"',warn=F)")))
   test<-test[500:1000]
   test<-test[-grep("img",test)]
@@ -281,7 +282,9 @@ for(i in 1:6){
     author<-tst[grep(":author",tst)]
     postTime<-tst[grep("기사입력",tst)]
     chgTime<-tst[grep("최종수정",tst)]
-    con<-tst[grep("본문 내용",tst)[1]:grep("본문 내용",tst)[2]]
+    if(length(grep("본문 내용",tst))>1){
+    con<-tst[grep("본문 내용",tst)[1]:grep("본문 내용",tst)[2]]}else{
+    con<-tst[grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)[ grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)>grep("본문 내용",tst)][1]]}
 
     cate<-gsub("[^(가-힣ㄱ-ㅎㅏ-ㅣ)]","",cate)
     title<-gsub('<meta property=\"og:title\"\t\t\tcontent=\"',"",title)
@@ -328,7 +331,9 @@ dd<-length(list07)
     author<-tst[grep(":author\"",tst)]
     postTime<-tst[grep("기사입력",tst)+1]
     chgTime<-tst[grep("최종수정",tst)]
-    con<-tst[grep("기사 내용",tst)[1]:grep("기사 내용",tst)[2]]
+    if(length(grep("기사 내용",tst))>1){
+    con<-tst[grep("기사 내용",tst)[1]:grep("기사 내용",tst)[2]]}else{
+    con<-tst[grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)[ grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)>grep("기사 내용",tst)][1]]}
 
     cate<-"스포츠"
     title<-gsub('<meta property=\"og:title\"       content=\"',"",title)
