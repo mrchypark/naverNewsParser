@@ -1,12 +1,57 @@
-library(stringr)
+ getNaverNews <- function()
+{ 
+  startDate <- as.Date(readline(prompt="Enter start date(yyyy-mm-dd): "))
+	  while(!grepl("^(19|20)..[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",startDate))
+	  {
+    	startDate <- readline(prompt="Please ;) enter start date(yyyy-mm-dd): ")
+      }
 
-##정치
-# 더미 list01 생성
+  endDate <- as.Date(readline(prompt="Enter end date(yyyy-mm-dd): "))
+	  while(!grepl("^(19|20)..[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",endDate))
+	  {
+		endDate <- readline(prompt="Please ;) enter end date(yyyy-mm-dd): ")
+      }
+      while(startDate>endDate)
+	  {
+		endDate <- readline(prompt="Please ;) enter end date later than start date(yyyy-mm-dd): ")
+      }
+
+  print("1: politics 2: economy 3: society 4: culture 5: world news 6: IT/science 7: sports")
+  print("If you don't enter 1 or 2, it will be done with nothing. Thank you.")
+  selectAll <- readline(prompt="Do you want colect all categories?(yes:1, no:2): ")
+      if(selectAll!=1){
+  selectPolitics <- readline(prompt="Do you want politics category?(yes:1, no:2): ")
+  selectEconomy <- readline(prompt="Do you want economy category?(yes:1, no:2): ")
+  selectSociety <- readline(prompt="Do you want society category?(yes:1, no:2): ")
+  selectCulture <- readline(prompt="Do you want culture category?(yes:1, no:2): ")
+  selectWorld <- readline(prompt="Do you want world news category?(yes:1, no:2): ")
+  selectScience <- readline(prompt="Do you want IT/science category?(yes:1, no:2): ")
+  selectSports <- readline(prompt="Do you want sports category?(yes:1, no:2): ")
+}else{selectPolitics<-1;selectEconomy<-1;selectSociety<-1;selectCulture<-1;selectWorld<-1;selectScience<-1;selectSports<-1}
+
+print(paste("Please wait. Results will save at",getwd()))
+print("Start step 1. Scraping URL.")
+
+#}
+#print(getNaverNews())
+
+end<-as.integer(endDate-startDate)
+
+listAll<-list()
 list01<-list()
+list02<-list()
+list03<-list()
+list04<-list()
+list05<-list()
+list06<-list()
+list07<-list()
+
+
+if(selectPolitics==1){
+
 # 날짜 변경 for 문
-for(j in 0:1095){ 
-    # 날짜 2012년 1월 1일 부터 +1095일까지
-    dd<-as.Date(j, origin = "2012-01-01")
+for(j in 0:end){ 
+    dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
     # 페이지를 인식하기 위해 조건을 줌
     len<-0
@@ -15,7 +60,6 @@ for(j in 0:1095){
 while(len!=lennow){
   
   len<-lennow
-  # 네이버 정치면 주소
   test<-eval(parse(text=paste0("readLines('http://news.naver.com/main/list.nhn?sid2=269&sid1=100&mid=shm&mode=LS2D&date=",kk,"&page=",i,"',warn=F)")))
   test<-test[500:1000]
   test<-test[-grep("img",test)]
@@ -26,9 +70,7 @@ while(len!=lennow){
   list01<-unlist(list01)
   list01<-unique(list01)
   lennow<-length(list01)
-#  print(lennow)
-#  print(i)
-#  print(kk)
+  print(paste("I'm scraping politics part",lennow,"links. I'm at",kk,"date,",i,"page."))
   i<-i+1
 
 }}
@@ -36,19 +78,19 @@ while(len!=lennow){
 list01<-gsub('<a href=\"','',list01)
 list01<-gsub('\">','',list01)
 list01<-substr(list01,1,108)
-list01<-list01[-grep("hot",list01)]
-list01<-list01[-grep("endic",list01)]
-write.csv(list01,"list01.csv",row.names=F)
+if(length(grep("hot",list01))>0){list01<-list01[-grep("hot",list01)]}
+if(length(grep("endic",list01))>0){list01<-list01[-grep("endic",list01)]}
+if(length(grep("target",list01))>0){list01<-list01[-grep("target",list01)]}
+if(length(grep("class",list01))>0){list01<-list01[-grep("class",list01)]}
+}
 
-print(length(list01))
-print("part 2 start")
+if(selectEconomy==1){
 
-##경제
-
-list02<-list()
-for(j in 0:1095){ 
-    dd<-as.Date(j, origin = "2012-01-01")
+# 날짜 변경 for 문
+for(j in 0:end){ 
+    dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
+    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
@@ -65,9 +107,7 @@ while(len!=lennow){
   list02<-unlist(list02)
   list02<-unique(list02)
   lennow<-length(list02)
-#  print(lennow)
-#  print(i)
-#  print(kk)
+  print(paste("I'm scraping economy part",lennow,"links. I'm at",kk,"date,",i,"page."))
   i<-i+1
 
 }}
@@ -75,19 +115,19 @@ while(len!=lennow){
 list02<-gsub('<a href=\"','',list02)
 list02<-gsub('\">','',list02)
 list02<-substr(list02,1,108)
-list02<-list02[-grep("hot",list02)]
-list02<-list02[-grep("endic",list02)]
-write.csv(list02,"list02.csv",row.names=F)
+if(length(grep("hot",list02))>0){list02<-list02[-grep("hot",list02)]}
+if(length(grep("endic",list02))>0){list02<-list02[-grep("endic",list02)]}
+if(length(grep("target",list02))>0){list02<-list02[-grep("target",list02)]}
+if(length(grep("class",list02))>0){list02<-list02[-grep("class",list02)]}
+}
 
-print(length(list02))
-print("part 3 start")
+if(selectSociety==1){
 
-##사회
-
-list03<-list()
-for(j in 0:1095){ 
-    dd<-as.Date(j, origin = "2012-01-01")
+# 날짜 변경 for 문
+for(j in 0:end){ 
+    dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
+    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
@@ -104,9 +144,7 @@ while(len!=lennow){
   list03<-unlist(list03)
   list03<-unique(list03)
   lennow<-length(list03)
-#  print(lennow)
-#  print(i)
-#  print(kk)
+  print(paste("I'm scraping society part",lennow,"links. I'm at",kk,"date,",i,"page."))
   i<-i+1
 
 }}
@@ -114,19 +152,19 @@ while(len!=lennow){
 list03<-gsub('<a href=\"','',list03)
 list03<-gsub('\">','',list03)
 list03<-substr(list03,1,108)
-list03<-list03[-grep("hot",list03)]
-list03<-list03[-grep("endic",list03)]
-write.csv(list03,"list03.csv",row.names=F)
+if(length(grep("hot",list03))>0){list03<-list03[-grep("hot",list03)]}
+if(length(grep("endic",list03))>0){list03<-list03[-grep("endic",list03)]}
+if(length(grep("target",list03))>0){list03<-list03[-grep("target",list03)]}
+if(length(grep("class",list03))>0){list03<-list03[-grep("class",list03)]}
+}
 
-print(length(list03))
-print("part 4 start")
+if(selectCulture==1){
 
-##생활/문화
-
-list04<-list()
-for(j in 0:1095){ 
-    dd<-as.Date(j, origin = "2012-01-01")
+# 날짜 변경 for 문
+for(j in 0:end){ 
+    dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
+    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
@@ -143,9 +181,7 @@ while(len!=lennow){
   list04<-unlist(list04)
   list04<-unique(list04)
   lennow<-length(list04)
-#  print(lennow)
-#  print(i)
-#  print(kk)
+  print(paste("I'm scraping culture part",lennow,"links. I'm at",kk,"date,",i,"page."))
   i<-i+1
 
 }}
@@ -153,19 +189,19 @@ while(len!=lennow){
 list04<-gsub('<a href=\"','',list04)
 list04<-gsub('\">','',list04)
 list04<-substr(list04,1,108)
-list04<-list01[-grep("hot",list04)]
-list04<-list01[-grep("endic",list04)]
-write.csv(list04,"list04.csv",row.names=F)
+if(length(grep("hot",list04))>0){list04<-list04[-grep("hot",list04)]}
+if(length(grep("endic",list04))>0){list04<-list04[-grep("endic",list04)]}
+if(length(grep("target",list04))>0){list04<-list04[-grep("target",list04)]}
+if(length(grep("class",list04))>0){list04<-list04[-grep("class",list04)]}
+}
 
-print(length(list04))
-print("part 5 start")
+if(selectWorld==1){
 
-##세계
-
-list05<-list()
-for(j in 0:1095){ 
-    dd<-as.Date(j, origin = "2012-01-01")
+# 날짜 변경 for 문
+for(j in 0:end){ 
+    dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
+    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
@@ -177,14 +213,12 @@ while(len!=lennow){
   test<-test[-grep("img",test)]
   listif<-unique(gsub("\t","",test[grep("href=\"http",test)]))
   list05<-c(list05,listif)
-  
+
   Sys.sleep(0.5)
   list05<-unlist(list05)
   list05<-unique(list05)
   lennow<-length(list05)
-#  print(lennow)
-#  print(i)
-#  print(kk)
+  print(paste("I'm scraping world news part",lennow,"links. I'm at",kk,"date,",i,"page."))
   i<-i+1
 
 }}
@@ -192,19 +226,19 @@ while(len!=lennow){
 list05<-gsub('<a href=\"','',list05)
 list05<-gsub('\">','',list05)
 list05<-substr(list05,1,108)
-list05<-list05[-grep("hot",list05)]
-list05<-list05[-grep("endic",list05)]
-write.csv(list05,"list05.csv",row.names=F)
+if(length(grep("hot",list05))>0){list05<-list05[-grep("hot",list05)]}
+if(length(grep("endic",list05))>0){list05<-list05[-grep("endic",list05)]}
+if(length(grep("target",list05))>0){list05<-list05[-grep("target",list05)]}
+if(length(grep("class",list05))>0){list05<-list05[-grep("class",list05)]}
+}
 
-print(length(list05))
-print("part 6 start")
+if(selectScience==1){
 
-##과학
-
-list06<-list()
-for(j in 0:1095){ 
-    dd<-as.Date(j, origin = "2012-01-01")
+# 날짜 변경 for 문
+for(j in 0:end){ 
+    dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
+    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
@@ -216,14 +250,12 @@ while(len!=lennow){
   test<-test[-grep("img",test)]
   listif<-unique(gsub("\t","",test[grep("href=\"http",test)]))
   list06<-c(list06,listif)
-  
+
   Sys.sleep(0.5)
   list06<-unlist(list06)
   list06<-unique(list06)
   lennow<-length(list06)
-#  print(lennow)
-#  print(i)
-#  print(kk)
+  print(paste("I'm scraping IT/Science part",lennow,"links. I'm at",kk,"date,",i,"page."))
   i<-i+1
 
 }}
@@ -231,18 +263,17 @@ while(len!=lennow){
 list06<-gsub('<a href=\"','',list06)
 list06<-gsub('\">','',list06)
 list06<-substr(list06,1,108)
-list06<-list06[-grep("hot",list06)]
-list06<-list06[-grep("endic",list06)]
-write.csv(list06,"list06.csv",row.names=F)
+if(length(grep("hot",list06))>0){list06<-list06[-grep("hot",list06)]}
+if(length(grep("endic",list06))>0){list06<-list06[-grep("endic",list06)]}
+if(length(grep("target",list06))>0){list06<-list06[-grep("target",list06)]}
+if(length(grep("class",list06))>0){list06<-list06[-grep("class",list06)]}
+}
 
-print(length(list06))
-print("part 7 start")
 
-##스포츠
+if(selectSports==1){
 
-list07<-list()
-for(j in 0:1095){ 
-    dd<-as.Date(j, origin = "2012-01-01")
+for(j in 0:end){ 
+    dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
     len<-0
     lennow<-1
@@ -260,28 +291,34 @@ while(len!=lennow){
   list07<-unlist(list07)
   list07<-unique(list07)
   lennow<-length(list07)
-  print(lennow)
-  print(i)
-  print(kk)
+  print(paste("I'm scraping sports part",lennow,"links. I'm at",kk,"date,",i,"page."))
   i<-i+1
 
 }}
+}
 
-write.csv(list07,"list07.csv",row.names=F)
-print(length(list07))
-print("End")
+listAll<-c(list01,list02,list03,list04,list05,list06,list07)
+write.csv(listAll,"list.csv",row.names=F)
+print(paste("We get",length(listALL),"links!"))
+print(paste("Get url list is Done! It is saved at",getwd()))
+print("Start step 2. Crawling contents. This is last step.")
 
+listAll<-c(list01,list02,list03,list04,list05,list06)
 
-#########################################################################################################
+dataAll<-data.frame(category=8,title="test",author="test",postTime="time",chgTime="time",contents="test")
 
-
-list<-data.frame(category=8,title="test",author="test",postTime="time",chgTime="time",contents="test")
-for(i in 1:6){
-  test<-eval(parse(text=gsub(" ","",paste("list0",i))))
-  dd<-length(test)
+  dd<-length(listAll)
   for(j in 1:dd){
-    tt<-test[j]
-    tst<-readLines(tt,warn=F)
+    tt<-as.character(listAll[j])
+    if(nchar(tt)==144|nchar(tt)==138){substr(tt,1,108)->tt}
+    tst<-try(readLines(tt,warn=F),silent=T)
+    	if(is(tst,"try-error")){
+    		if(nchar(tt)==94){
+    			Sys.sleep(1.5)
+    			tst<-readLines(tt,warn=F)
+    		}
+    		stop("New one!")
+    	}
 
     tst<-gsub('&nbsp;',"",tst)
     tst<-gsub('&lt;',"<",tst)
@@ -319,19 +356,24 @@ for(i in 1:6){
     con<-paste(con, collapse = "")
 
     listTem<-data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con)
-    list<-rbind(list,listTem)
+    dataAll<-rbind(dataAll,listTem)
 
 Sys.sleep(0.5)
-print(paste(i,j,j/dd,"%"))
-}}
+print(paste(cate,j,j/dd*100,"%"))
+}
 
-
-list<-data.frame(category=8,title="test",author="test",postTime="time",chgTime="time",contents="test")
+if(selectSports==1){
 dd<-length(list07)
   for(j in 1:dd){
     tt<-list07[j]
-    tst<-readLines(tt,warn=F)
-
+    tst<-try(readLines(tt,warn=F),silent=T)
+      if(is(tst,"try-error")){
+          if(nchar(tt)==94){
+              Sys.sleep(1)
+            tst<-try(readLines(tt,warn=F),silent=T)
+          }
+          stop("New one!")
+        }
     tst<-gsub('&nbsp;',"",tst)
     tst<-gsub('&lt;',"<",tst)
     tst<-gsub('&gt;',">",tst)
@@ -371,8 +413,15 @@ dd<-length(list07)
     con<-paste(con, collapse = "")
 
     listTem<-data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con)
-    list<-rbind(list,listTem)
+    dataAll<-rbind(dataAll,listTem)
 
 Sys.sleep(0.5)
-print(paste(i,j,j/dd,"%"))
+print(paste(cate,j,j/dd*100,"%"))
 }
+}
+dataAll<-dataAll[-1,]
+write.csv(dataAll,"dataAll.csv",row.names=F)
+print(paste("Get contents is Done! It is saved at",getwd()))
+}
+
+print(getNaverNews())
