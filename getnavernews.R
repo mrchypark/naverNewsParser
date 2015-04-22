@@ -300,7 +300,7 @@ while(len!=lennow){
 listAll<-c(list01,list02,list03,list04,list05,list06,list07)
 write.csv(listAll,"list.csv",row.names=F)
 print(paste("We get",length(listALL),"links!"))
-print(paste("Get url list is Done! It is saved at",getwd()))
+print(paste("Get url list is Done! It is saved at",getwd(),"named list.csv."))
 print("Start step 2. Crawling contents. This is last step.")
 
 listAll<-c(list01,list02,list03,list04,list05,list06)
@@ -309,7 +309,7 @@ dataAll<-data.frame(category=8,title="test",author="test",postTime="time",chgTim
 
   dd<-length(listAll)
   for(j in 1:dd){
-    tt<-as.character(listAll[j])
+    tt<<-as.character(listAll[j])
     if(nchar(tt)==144|nchar(tt)==138){substr(tt,1,108)->tt}
     tst<-try(readLines(tt,warn=F),silent=T)
     	if(is(tst,"try-error")){
@@ -365,7 +365,7 @@ print(paste(cate,j,j/dd*100,"%"))
 if(selectSports==1){
 dd<-length(list07)
   for(j in 1:dd){
-    tt<-list07[j]
+    tt<<-list07[j]
     tst<-try(readLines(tt,warn=F),silent=T)
       if(is(tst,"try-error")){
           if(nchar(tt)==94){
@@ -421,7 +421,7 @@ print(paste(cate,j,j/dd*100,"%"))
 }
 dataAll<-dataAll[-1,]
 write.csv(dataAll,"dataAll.csv",row.names=F)
-print(paste("Get contents is Done! It is saved at",getwd()))
+print(paste("Get contents is Done! It is saved at",getwd(),"named dataAll.csv."))
 }
 
 print(getNaverNews())
