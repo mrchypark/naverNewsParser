@@ -49,11 +49,9 @@ list07<-list()
 
 if(selectPolitics==1){
 
-# 날짜 변경 for 문
 for(j in 0:end){ 
     dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
-    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
@@ -86,11 +84,9 @@ if(length(grep("class",list01))>0){list01<-list01[-grep("class",list01)]}
 
 if(selectEconomy==1){
 
-# 날짜 변경 for 문
 for(j in 0:end){ 
     dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
-    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
@@ -123,11 +119,9 @@ if(length(grep("class",list02))>0){list02<-list02[-grep("class",list02)]}
 
 if(selectSociety==1){
 
-# 날짜 변경 for 문
 for(j in 0:end){ 
     dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
-    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
@@ -160,11 +154,9 @@ if(length(grep("class",list03))>0){list03<-list03[-grep("class",list03)]}
 
 if(selectCulture==1){
 
-# 날짜 변경 for 문
 for(j in 0:end){ 
     dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
-    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
@@ -197,11 +189,9 @@ if(length(grep("class",list04))>0){list04<-list04[-grep("class",list04)]}
 
 if(selectWorld==1){
 
-# 날짜 변경 for 문
 for(j in 0:end){ 
     dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
-    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
@@ -234,11 +224,9 @@ if(length(grep("class",list05))>0){list05<-list05[-grep("class",list05)]}
 
 if(selectScience==1){
 
-# 날짜 변경 for 문
 for(j in 0:end){ 
     dd<-as.Date(j, origin = startDate)
     kk<-gsub('-',"",as.character(dd))
-    # 페이지를 인식하기 위해 조건을 줌
     len<-0
     lennow<-1
     i<-1
