@@ -1,6 +1,6 @@
 # v0.1<br>
 getwd()로 확인한 작업공간에 getnavernews.R파일을 저장합니다.
-R 콘솔에 source("getnavernews.R")을 입력하면 시작합니다.<br>
+R 콘솔에 source("getnavernews.R",encoding="UTF-8")을 입력하면 시작합니다.<br>
 처음에 크롤링을 시작할 날짜와 마지막 날짜를 물어보면 yyy-mm-dd 양식으로 입력합니다.<br>
 7개 카테고리 모두 긁어올 것인지 물어봅니다. 1을 입력하면 모두 이고 나머지는 각 카테고리를 다시 질문합니다.<br>
 <br>
