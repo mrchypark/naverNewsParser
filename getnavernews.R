@@ -467,7 +467,7 @@ for(j in 0:end)
 for(j in 0:end)
                 {
                     dd<-as.Date(j, origin = startDate)
-                    kk<-gsub('-',"",as.character(dd))
+                    kk<-as.character(dd)
                     len<-0
                     lennow<-1
                     i<-1
@@ -588,6 +588,7 @@ for(j in 1:dd)
                     con<-gsub("<!--(([^-]*)|([-]{1})|([-]{2})([^>]{1}))*?-->","",con)
                     con<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",con)
                     con<-paste(con, collapse = "")
+
 
                     listTem<-data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con)
                     dataAll<-rbind(dataAll,listTem)

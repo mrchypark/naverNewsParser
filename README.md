@@ -3,12 +3,15 @@ getwd()로 확인한 작업공간에 getnavernews.R파일을 저장합니다.<br
 R 콘솔에 source("getnavernews.R",encoding="UTF-8")을 입력하면 시작합니다.<br>
 처음에 크롤링을 시작할 날짜와 마지막 날짜를 물어보면 yyy-mm-dd 양식으로 입력합니다.<br>
 8개 카테고리 모두 긁어올 것인지 물어봅니다. 1을 입력하면 모두 이고 나머지는 각 카테고리를 다시 질문합니다.<br>
+코드 관련 내용은 맨 하단에 있습니다.<br>
+<br>
+# v0.21<br>
+TV연애 부분 에러를 수정했습니다.<br>
 <br>
 # v0.2<br>
 8번째 카테고리인 TV연애를 추가했습니다. TV연애는 2014년 1월 1일부터 네이버가 시작했습니다.<br>
 중간에 에러가 나면 그냥 멈추던 문제를 개선해서 5번 재 시도 해보고 안되면 다음 링크로 넘기게 우회처리했습니다.<br>
 코드가 끝나면 errorURL 변수에 수집이 안된 url이 저장됩니다.<br>
-<br>
 <br>
 # v0.1<br>
 여전히 매우 느리지만 얼마나 진행중인지 표시하도록 했습니다.<br>
@@ -48,7 +51,7 @@ for 문과 while 문으로 단순 반복 시킵니다.<br>
 <br>
 This source code is to parse naver news in Korea.<br>
 As you can see this code is by R.<br>
-Naver news categories are 7(politics, economy, society, culture, world news, IT/science, sports).<br>
+Naver news categories are 8(politics, economy, society, culture, world news, IT/science, sports, entertainment).<br>
 Always welcome your participation.<br>
 
 
