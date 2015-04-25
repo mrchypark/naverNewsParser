@@ -651,7 +651,7 @@ getNaverNews <- function()
 
                                     listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
                                     options(warn=-1)
-                                    if(grepl("Read error",listTem))
+                                    if(!grepl("Read error",listTem))
                                         {
                                            
                                             dataAll<-rbind(dataAll,listTem)
@@ -661,6 +661,7 @@ getNaverNews <- function()
                                     else
                                         {
                                             print(paste("This link is not right.",tt))
+                                            print(paste(cate,j,j/dd*100,"% above"))
                                             errorURL<<-c(errorURL,tt)
                                         }
                                     options(warn=1)
@@ -744,7 +745,7 @@ getNaverNews <- function()
 
                                     listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
                                     options(warn=-1)
-                                    if(grepl("Read error",listTem))
+                                    if(!grepl("Read error",listTem))
                                         {
                                            
                                             dataAll<-rbind(dataAll,listTem)
@@ -754,6 +755,7 @@ getNaverNews <- function()
                                     else
                                         {
                                             print(paste("This link is not right.",tt))
+                                            print(paste(cate,j,j/dd*100,"% above"))
                                             errorURL<<-c(errorURL,tt)
                                         }
                                     options(warn=1)
@@ -847,7 +849,7 @@ getNaverNews <- function()
 
                                     listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
                                     options(warn=-1)
-                                    if(grepl("Read error",listTem))
+                                    if(!grepl("Read error",listTem))
                                         {
                                            
                                             dataAll<-rbind(dataAll,listTem)
@@ -856,6 +858,7 @@ getNaverNews <- function()
                                     else
                                         {
                                             print(paste("This link is not right.",tt))
+                                            print(paste(cate,j,j/dd*100,"% above"))
                                             errorURL<<-c(errorURL,tt)
                                         }
                                     options(warn=1)
