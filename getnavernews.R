@@ -509,6 +509,9 @@ getNaverNews <- function()
                 }
         }
 
+    list07Len<-length(list07)
+    list07<-list07[1:list07Len-1]
+
     if(selectEntertain==1)
         {
 
@@ -555,6 +558,9 @@ getNaverNews <- function()
                 }
         }
 
+    list08Len<-length(list08)
+    list08<-list08[1:list08Len-1]
+
     listAll<-c(list01,list02,list03,list04,list05,list06,list07,list08)
     write.csv(listAll,"listURL.csv",row.names=F)
     print(paste("We get",length(listAll),"links!"))
@@ -571,7 +577,7 @@ getNaverNews <- function()
     print("Start step 2. Crawling contents. This is last step.")
     dataAll<-data.frame(category=8,title="test",author="test",postTime="time",chgTime="time",contents="test")
     errorURL<-list()
-
+    dd<-length(listAll)
     if(listLen>0)
         {
             if(length(listAll)>0)
@@ -653,7 +659,6 @@ getNaverNews <- function()
                                     options(warn=-1)
                                     if(!grepl("Read error",listTem))
                                         {
-                                           
                                             dataAll<-rbind(dataAll,listTem)
                                             print(paste(cate,j,j/dd*100,"%"))
                                         }
