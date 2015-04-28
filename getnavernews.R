@@ -835,7 +835,6 @@ getNaverNews <- function()
                                 {
                                     substr(tt,1,108)->tt
                                 }
-                            tst<-readLines(tt,warn=F,encoding="UTF-8")
                             ncnt<-1
                             options(warn=-1)
                             tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
@@ -938,7 +937,6 @@ getNaverNews <- function()
                     for(j in 1:dd)
                         {
                             tt<-as.character(list09[j])
-                            tst<-readLines(tt,warn=F,encoding="UTF-8")
                             ncnt<-1
                             options(warn=-1)
                             tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
