@@ -649,7 +649,7 @@ getNaverNews <- function()
                             tst<-tryCatch(readLines(tt,warn=F),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             if(grepl("Read error",tst))
                                 {
-                                    while(ncnt>3)
+                                    while(ncnt<3)
                                         {
                                             Sys.sleep(1)
                                             tst<-tryCatch(readLines(tt,warn=F),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
@@ -740,7 +740,7 @@ getNaverNews <- function()
                             tst<-tryCatch(readLines(tt,warn=F),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             if(grepl("Read error",tst))
                                 {
-                                    while(ncnt>3)
+                                    while(ncnt<3)
                                         {
                                             Sys.sleep(1)
                                             tst<-tryCatch(readLines(tt,warn=F),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
@@ -840,7 +840,7 @@ getNaverNews <- function()
                             tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             if(grepl("Read error",tst))
                                 {
-                                    while(ncnt>3)
+                                    while(ncnt<3)
                                         {
                                             Sys.sleep(1)
                                             tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
@@ -942,7 +942,7 @@ getNaverNews <- function()
                             tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             if(grepl("Read error",tst))
                                 {
-                                    while(ncnt>3)
+                                    while(ncnt<3)
                                         {
                                             Sys.sleep(1)
                                             tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
