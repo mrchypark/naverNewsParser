@@ -4,7 +4,7 @@ getNaverNews <- function()
         print("Safe mode is consider ip ban to collect slowly.")
         collectMode <- readline(prompt="Choose mode(1: Fast mode 2: Safe mode): ")
 
-        if(collectMode=1){CTime=0.01}else{CTime=0.5}
+        if(collectMode==1){CTime=0.01}else{CTime=0.5}
 
     startDate <- as.Date(readline(prompt="Enter start date(yyyy-mm-dd): "))
     while(!grepl("^(19|20)..[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",startDate))
@@ -67,7 +67,6 @@ getNaverNews <- function()
     list08<-list()
     list09<-list()
 
-
     if(selectPolitics==1)
         {
 
@@ -85,7 +84,6 @@ getNaverNews <- function()
 
                             len<-lennow
                             ncnt<-1
-
                             options(warn=-1)
                             test<-tryCatch(eval(parse(text=paste0("readLines('http://news.naver.com/main/list.nhn?sid2=269&sid1=100&mid=shm&mode=LS2D&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             if(grepl("Read error",test))
