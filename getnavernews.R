@@ -595,6 +595,7 @@ getNaverNews <- function()
                                 }
                             options(warn=1)
 
+                            test<-test[-grep("img",test)]
                             test<-test[grep("메인뉴스",test):grep("뉴스리스트",test)[2]]
                             test<-unique(gsub("\t","",test[grep("href",test)]))
                             test<-gsub('<a href=\"',"",test)
@@ -644,8 +645,8 @@ getNaverNews <- function()
                                 }
 
                             ncnt<-1
-                            tst<-tryCatch(readLines(tt,warn=F),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             options(warn=-1)
+                            tst<-tryCatch(readLines(tt,warn=F),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             if(grepl("Read error",tst))
                                 {
                                     while(ncnt>3)
@@ -709,8 +710,8 @@ getNaverNews <- function()
                                     con<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",con)
                                     con<-paste(con, collapse = "")
 
-                                    listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
                                     options(warn=-1)
+                                    listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
                                     if(!grepl("Read error",listTem))
                                         {
                                             dataAll<-rbind(dataAll,listTem)
@@ -735,8 +736,8 @@ getNaverNews <- function()
                         {
                             tt<-list07[j]
                             ncnt<-1
-                            tst<-tryCatch(readLines(tt,warn=F),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             options(warn=-1)
+                            tst<-tryCatch(readLines(tt,warn=F),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             if(grepl("Read error",tst))
                                 {
                                     while(ncnt>3)
@@ -803,8 +804,8 @@ getNaverNews <- function()
                                     con<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",con)
                                     con<-paste(con, collapse = "")
 
-                                    listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
                                     options(warn=-1)
+                                    listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
                                     if(!grepl("Read error",listTem))
                                         {
                                            
@@ -836,8 +837,8 @@ getNaverNews <- function()
                                 }
                             tst<-readLines(tt,warn=F,encoding="UTF-8")
                             ncnt<-1
-                            tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             options(warn=-1)
+                            tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             if(grepl("Read error",tst))
                                 {
                                     while(ncnt>3)
@@ -909,9 +910,9 @@ getNaverNews <- function()
                                         }
                                     con<-paste(con, collapse = "")
                                     con<-gsub("<!--.*-->","",con)
-
-                                    listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
+                                    
                                     options(warn=-1)
+                                    listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
                                     if(!grepl("Read error",listTem))
                                         {
                                            
@@ -939,8 +940,8 @@ getNaverNews <- function()
                             tt<-as.character(list09[j])
                             tst<-readLines(tt,warn=F,encoding="UTF-8")
                             ncnt<-1
-                            tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             options(warn=-1)
+                            tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                             if(grepl("Read error",tst))
                                 {
                                     while(ncnt>3)
@@ -993,9 +994,8 @@ getNaverNews <- function()
                                     con<-gsub("<h3>.*</h3>","",con)
                                     con<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",con)
 
-
-                                    listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
                                     options(warn=-1)
+                                    listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
                                     if(!grepl("Read error",listTem))
                                         {
                                            
