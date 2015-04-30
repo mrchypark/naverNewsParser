@@ -1,26 +1,37 @@
 getNaverNews <- function()
 {
-        print("Fast mode is not consider ip ban.")
-        print("Safe mode is consider ip ban to collect slowly.")
-        collectMode <- readline(prompt="Choose mode(1: Fast mode 2: Safe mode): ")
+    print("Fast mode is not consider ip ban.")
+    print("Safe mode is consider ip ban to collect slowly.")
+    collectMode <- readline(prompt="Choose mode(1: Fast mode 2: Safe mode): ")
 
-        if(collectMode==1){CTime=0.01}else{CTime=0.5}
+    if(collectMode==1)
+        {
+            CTime=0.01
+        }
+          else
+        {
+            CTime=0.5
+        }
 
-    startDate <- as.Date(readline(prompt="Enter start date(yyyy-mm-dd): "))
-    while(!grepl("^(19|20)..[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",startDate))
+          startDate <- as.Date(readline(prompt="Enter start date(yyyy-mm-dd): "))
+          while(!grepl("^(19|20)..[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",startDate))
+# end while
         {
             startDate <- as.Date(readline(prompt="Please ;) enter start date(yyyy-mm-dd): "))
         }
+# end if
 
     endDate <- as.Date(readline(prompt="Enter end date(yyyy-mm-dd): "))
     while(!grepl("^(19|20)..[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$",endDate))
         {
             endDate <- as.Date(readline(prompt="Please ;) enter end date(yyyy-mm-dd): "))
         }
+# end while
     while(startDate>endDate)
         {
             endDate <- as.Date(readline(prompt="Please ;) enter end date later than start date(yyyy-mm-dd): "))
         }
+# end while
 
     print("1: politics 2: economy 3: society 4: culture 5: world news 6: IT/science 7: sports 8: entertainment 9: weather")
     print("If you don't enter 1 or 2, it will be done with nothing. Thank you.")
@@ -49,6 +60,7 @@ getNaverNews <- function()
             selectEntertain<-1
             selectWeather<-1
         }
+# end if
 
     print(paste("Please wait. Results will save at",getwd()))
     print("Start step 1. Scraping URL.")
@@ -94,7 +106,9 @@ getNaverNews <- function()
                                             test<-tryCatch(eval(parse(text=paste0("readLines('http://news.naver.com/main/list.nhn?sid2=269&sid1=100&mid=shm&mode=LS2D&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
 
                             test<-test[500:1000]
@@ -110,7 +124,9 @@ getNaverNews <- function()
                             i<-i+1
 
                         }
+# end while
                 }
+# end for
 
             list01<-gsub('<a href=\"','',list01)
             list01<-gsub('\">','',list01)
@@ -119,19 +135,24 @@ getNaverNews <- function()
                 {
                     list01<-list01[-grep("hot",list01)]
                 }
+# end if
             if(length(grep("endic",list01))>0)
                 {
                     list01<-list01[-grep("endic",list01)]
                 }
+# end if
             if(length(grep("target",list01))>0)
                 {
                     list01<-list01[-grep("target",list01)]
                 }
+# end if
             if(length(grep("class",list01))>0)
                 {
                     list01<-list01[-grep("class",list01)]
                 }
+# end if
         }
+# end if
 
     if(selectEconomy==1)
         {
@@ -161,7 +182,9 @@ getNaverNews <- function()
                                             test<-tryCatch(eval(parse(text=paste0("readLines('http://news.naver.com/main/list.nhn?sid2=263&sid1=101&mid=shm&mode=LS2D&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
 
                             test<-test[500:1000]
@@ -177,7 +200,9 @@ getNaverNews <- function()
                             i<-i+1
 
                         }
+# end while
                 }
+# end for
 
             list02<-gsub('<a href=\"','',list02)
             list02<-gsub('\">','',list02)
@@ -186,19 +211,24 @@ getNaverNews <- function()
                 {
                     list02<-list02[-grep("hot",list02)]
                 }
+# end if
             if(length(grep("endic",list02))>0)
                 {
                     list02<-list02[-grep("endic",list02)]
                 }
+# end if
             if(length(grep("target",list02))>0)
                 {
                     list02<-list02[-grep("target",list02)]
                 }
+# end if
             if(length(grep("class",list02))>0)
                 {
                     list02<-list02[-grep("class",list02)]
                 }
+# end if
         }
+# end if
 
     if(selectSociety==1)
         {
@@ -228,7 +258,9 @@ getNaverNews <- function()
                                             test<-tryCatch(eval(parse(text=paste0("readLines('http://news.naver.com/main/list.nhn?sid2=257&sid1=102&mid=shm&mode=LS2D&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
 
                             test<-test[500:1000]
@@ -244,7 +276,9 @@ getNaverNews <- function()
                             i<-i+1
 
                         }
+# end while
                 }
+# end for
 
             list03<-gsub('<a href=\"','',list03)
             list03<-gsub('\">','',list03)
@@ -253,19 +287,24 @@ getNaverNews <- function()
                 {
                     list03<-list03[-grep("hot",list03)]
                 }
+# end if
             if(length(grep("endic",list03))>0)
                 {
                     list03<-list03[-grep("endic",list03)]
                 }
+# end if
             if(length(grep("target",list03))>0)
                 {
                     list03<-list03[-grep("target",list03)]
                 }
+# end if
             if(length(grep("class",list03))>0)
                 {
                     list03<-list03[-grep("class",list03)]
                 }
+# end if
         }
+# end if
 
     if(selectCulture==1)
         {
@@ -295,7 +334,9 @@ getNaverNews <- function()
                                             test<-tryCatch(eval(parse(text=paste0("readLines('http://news.naver.com/main/list.nhn?sid2=245&sid1=103&mid=shm&mode=LS2D&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
 
                             test<-test[500:1000]
@@ -311,7 +352,9 @@ getNaverNews <- function()
                             i<-i+1
 
                         }
+# end while
                 }
+# end for
 
             list04<-gsub('<a href=\"','',list04)
             list04<-gsub('\">','',list04)
@@ -320,19 +363,24 @@ getNaverNews <- function()
                 {
                     list04<-list04[-grep("hot",list04)]
                 }
+# end if
             if(length(grep("endic",list04))>0)
                 {
                     list04<-list04[-grep("endic",list04)]
                 }
+# end if
             if(length(grep("target",list04))>0)
                 {
                     list04<-list04[-grep("target",list04)]
                 }
+# end if
             if(length(grep("class",list04))>0)
                 {
                     list04<-list04[-grep("class",list04)]
                 }
+# end if
         }
+# end if
 
     if(selectWorld==1)
         {
@@ -362,7 +410,9 @@ getNaverNews <- function()
                                             test<-tryCatch(eval(parse(text=paste0("readLines('http://news.naver.com/main/list.nhn?sid2=322&sid1=104&mid=shm&mode=LS2D&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
 
                             test<-test[500:1000]
@@ -378,7 +428,9 @@ getNaverNews <- function()
                             i<-i+1
 
                         }
+# end while
                 }
+# end for
 
             list05<-gsub('<a href=\"','',list05)
             list05<-gsub('\">','',list05)
@@ -387,19 +439,24 @@ getNaverNews <- function()
                 {
                     list05<-list05[-grep("hot",list05)]
                 }
+# end if
             if(length(grep("endic",list05))>0)
                 {
                     list05<-list05[-grep("endic",list05)]
                 }
+# end if
             if(length(grep("target",list05))>0)
                 {
                     list05<-list05[-grep("target",list05)]
                 }
+# end if
             if(length(grep("class",list05))>0)
                 {
                     list05<-list05[-grep("class",list05)]
                 }
+# end if
         }
+# end if
 
     if(selectScience==1)
         {
@@ -429,7 +486,9 @@ getNaverNews <- function()
                                             test<-tryCatch(eval(parse(text=paste0("readLines('http://news.naver.com/main/list.nhn?sid2=228&sid1=105&mid=shm&mode=LS2D&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
 
                             test<-test[500:1000]
@@ -445,7 +504,9 @@ getNaverNews <- function()
                             i<-i+1
 
                         }
+# end while
                 }
+# end for
 
             list06<-gsub('<a href=\"','',list06)
             list06<-gsub('\">','',list06)
@@ -454,19 +515,24 @@ getNaverNews <- function()
                 {
                     list06<-list06[-grep("hot",list06)]
                 }
+# end if
             if(length(grep("endic",list06))>0)
                 {
                     list06<-list06[-grep("endic",list06)]
                 }
+# end if
             if(length(grep("target",list06))>0)
                 {
                     list06<-list06[-grep("target",list06)]
                 }
+# end if
             if(length(grep("class",list06))>0)
                 {
                     list06<-list06[-grep("class",list06)]
                 }
+# end if
         }
+# end if
 
 
     if(selectSports==1)
@@ -497,7 +563,9 @@ getNaverNews <- function()
                                             test<-tryCatch(eval(parse(text=paste0("readLines('http://sports.news.naver.com/sports/index.nhn?category=sports_general&ctg=news&mod=lst&type=news&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
 
                             test<-test[698:1300]
@@ -513,11 +581,14 @@ getNaverNews <- function()
                             i<-i+1
 
                         }
+# end while
                 }
+# end for
         }
+# end if
 
     list07Len<-length(list07)
-    list07<-list07[1:list07Len-1]
+list07<-list07[1:list07Len-1]
 
     if(selectEntertain==1)
         {
@@ -547,7 +618,9 @@ getNaverNews <- function()
                                             test<-tryCatch(eval(parse(text=paste0("readLines('http://entertain.naver.com/home/mainNews?date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
 
                             test<-test[grep('class="tit"',test)]
@@ -562,13 +635,16 @@ getNaverNews <- function()
                             i<-i+1
 
                         }
+# end while
                 }
+# end for
         }
+# end if
 
     list08Len<-length(list08)
-    list08<-list08[1:list08Len-1]
+list08<-list08[1:list08Len-1]
 
-        if(selectWeather==1)
+    if(selectWeather==1)
         {
 
             print("Start weather part.")
@@ -579,38 +655,42 @@ getNaverNews <- function()
                     kk<-as.character(dd)
                     lennow<-1
 
-                            ncnt<-1
-                            options(warn=-1)
-                            test<-tryCatch(eval(parse(text=paste0("readLines('http://weather.naver.com/news/wetrNewsList.nhn?ymd=",kk,"',warn=F,encoding='UTF-8')"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
-                            if(grepl("Read error",test))
+                    ncnt<-1
+                    options(warn=-1)
+                    test<-tryCatch(eval(parse(text=paste0("readLines('http://weather.naver.com/news/wetrNewsList.nhn?ymd=",kk,"',warn=F,encoding='UTF-8')"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
+                    if(grepl("Read error",test))
+                        {
+                            while(ncnt>3)
                                 {
-                                    while(ncnt>3)
-                                        {
-                                            Sys.sleep(1)
-                                            test<-tryCatch(eval(parse(text=paste0("readLines('http://weather.naver.com/news/wetrNewsList.nhn?ymd=",kk,"',warn=F,,encoding='UTF-8')"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
-                                            ncnt<-ncnt+1
-                                        }
+                                    Sys.sleep(1)
+                                    test<-tryCatch(eval(parse(text=paste0("readLines('http://weather.naver.com/news/wetrNewsList.nhn?ymd=",kk,"',warn=F,,encoding='UTF-8')"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
+                                    ncnt<-ncnt+1
                                 }
-                            options(warn=1)
+# end while
+                        }
+# end if
+                    options(warn=1)
 
-                            test<-test[-grep("img",test)]
-                            test<-test[grep("메인뉴스",test):grep("뉴스리스트",test)[2]]
-                            test<-unique(gsub("\t","",test[grep("href",test)]))
-                            test<-gsub('<a href=\"',"",test)
-                            test<-gsub('\">',"",test)
-                            test<-paste("http://weather.naver.com/news/",test)
-                            listif<-gsub(' ',"",test)
-                            list09<-c(list09,listif)
+                    test<-test[-grep("img",test)]
+                    test<-test[grep("메인뉴스",test):grep("뉴스리스트",test)[2]]
+                        test<-unique(gsub("\t","",test[grep("href",test)]))
+                        test<-gsub('<a href=\"',"",test)
+                        test<-gsub('\">',"",test)
+                        test<-paste("http://weather.naver.com/news/",test)
+                        listif<-gsub(' ',"",test)
+                        list09<-c(list09,listif)
 
-                            Sys.sleep(CTime)
-                            list09<-unlist(list09)
-                            list09<-unique(list09)
-                            lennow<-length(list09)
-                            print(paste("I'm scraping weather part",lennow,"links. I'm at",kk,"date."))
+                        Sys.sleep(CTime)
+                        list09<-unlist(list09)
+                        list09<-unique(list09)
+                        lennow<-length(list09)
+                        print(paste("I'm scraping weather part",lennow,"links. I'm at",kk,"date."))
 
-                        
-                }
+
+                    }
+# end for
         }
+# end if
 
 
     listAll<-c(list01,list02,list03,list04,list05,list06,list07,list08,list09)
@@ -631,7 +711,8 @@ getNaverNews <- function()
     errorURL<-list()
     dd<-length(listAll)
     if(listLen>0)
-        {
+# end if
+    {
             if(length(listAll)>0)
                 {
                     for(j in 1:dd)
@@ -641,6 +722,7 @@ getNaverNews <- function()
                                 {
                                     substr(tt,1,108)->tt
                                 }
+# end if
 
                             ncnt<-1
                             options(warn=-1)
@@ -653,14 +735,16 @@ getNaverNews <- function()
                                             tst<-tryCatch(readLines(tt,warn=F),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
 
                             if(ncnt==3)
                                 {
                                     errorURL<<-c(errorURL,tt)
                                 }
-                                    else
+                            else
                                 {
                                     tst<-gsub('&nbsp;',"",tst)
                                     tst<-gsub('&lt;',"<",tst)
@@ -682,6 +766,7 @@ getNaverNews <- function()
                                         {
                                             con<-tst[grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)[ grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)>grep("본문 내용",tst)][1]]
                                         }
+# end if
 
                                     cate<-gsub("[^(가-힣ㄱ-ㅎㅏ-ㅣ)]","",cate)
                                     title<-gsub('<meta property=\"og:title\"\t\t\tcontent=\"',"",title)
@@ -703,6 +788,7 @@ getNaverNews <- function()
                                         {
                                             chgTime<-postTime
                                         }
+# end if
                                     con<-gsub("\t","",con)
                                     con<-gsub("<!--(([^-]*)|([-]{1})|([-]{2})([^>]{1}))*?-->","",con)
                                     con<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",con)
@@ -715,18 +801,22 @@ getNaverNews <- function()
                                             dataAll<-rbind(dataAll,listTem)
                                             print(paste(cate,j,j/dd*100,"%"))
                                         }
-                                        
+
                                     else
                                         {
                                             print(paste("This link is not right.",tt))
                                             print(paste(cate,j,j/dd*100,"% above"))
                                             errorURL<<-c(errorURL,tt)
                                         }
+# end if
                                     options(warn=1)
                                     Sys.sleep(CTime)
                                 }
+# end if
                         }
+# end for
                 }
+# end if
             if(selectSports==1)
                 {
                     dd<-length(list07)
@@ -744,7 +834,9 @@ getNaverNews <- function()
                                             tst<-tryCatch(readLines(tt,warn=F),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
 
                             if(ncnt==3)
@@ -772,6 +864,7 @@ getNaverNews <- function()
                                         {
                                             con<-tst[grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)[ grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)>grep("기사 내용",tst)][1]]
                                         }
+# end if
 
                                     cate<-"스포츠"
                                     title<-gsub('<meta property=\"og:title\"       content=\"',"",title)
@@ -797,6 +890,7 @@ getNaverNews <- function()
                                         {
                                             chgTime<-postTime
                                         }
+# end if
                                     con<-gsub("\t","",con)
                                     con<-gsub("<!--(([^-]*)|([-]{1})|([-]{2})([^>]{1}))*?-->","",con)
                                     con<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",con)
@@ -806,22 +900,26 @@ getNaverNews <- function()
                                     listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
                                     if(!grepl("Read error",listTem))
                                         {
-                                           
+
                                             dataAll<-rbind(dataAll,listTem)
                                             print(paste(cate,j,j/dd*100,"%"))
                                         }
-                                    
+
                                     else
                                         {
                                             print(paste("This link is not right.",tt))
                                             print(paste(cate,j,j/dd*100,"% above"))
                                             errorURL<<-c(errorURL,tt)
                                         }
+# end if
                                     options(warn=1)
                                     Sys.sleep(CTime)
                                 }
+# end if
                         }
+# end for
                 }
+# end if
 
             if(selectEntertain==1)
                 {
@@ -833,6 +931,7 @@ getNaverNews <- function()
                                 {
                                     substr(tt,1,108)->tt
                                 }
+# end if
                             ncnt<-1
                             options(warn=-1)
                             tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
@@ -844,89 +943,122 @@ getNaverNews <- function()
                                             tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
-                            if(ncnt==3)
+                            charSet<-length(grep("<meta charset=",tst))
+                            if(charSet!=0)
                                 {
-                                    errorURL<<-c(errorURL,tt)
+                                    options(warn=-1)
+                                    tst<-tryCatch(readLines(tt,warn=F,encoding="EUC-KR"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
+                                    if(grepl("Read error",tst))
+                                        {
+                                            while(ncnt<3)
+                                                {
+                                                    Sys.sleep(1)
+                                                    tst<-tryCatch(readLines(tt,warn=F,encoding="EUC-KR"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
+                                                    ncnt<-ncnt+1
+                                                }
+# end while
+                                        }
+# end if
+                                    options(warn=1)
+
                                 }
                             else
                                 {
 
-
-                                    tst<-gsub('&nbsp;',"",tst)
-                                    tst<-gsub('&lt;',"<",tst)
-                                    tst<-gsub('&gt;',">",tst)
-                                    tst<-gsub('&amp;',"&",tst)
-                                    tst<-gsub('&quot;','"',tst)
-                                    tst<-gsub('&#039;',"'",tst)
-                                    tst<-gsub('&#034','"',tst)
-
-                                    cate<-"TV연애"
-                                    title<-tst[grep("og:title",tst)]
-                                    author<-tst[grep(":author",tst)]
-                                    postTime<-tst[grep("기사입력",tst)]
-                                    chgTime<-tst[grep("최종수정",tst)]
-                                    if(length(grep("본문 내용",tst))>1)
+                                    if(ncnt==3)
                                         {
-                                            con<-tst[grep("본문 내용",tst)[1]:grep("본문 내용",tst)[2]]
-                                        }
-                                    else
-                                        {
-                                            con<-tst[grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)[ grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)>grep("본문 내용",tst)][1]]
-                                        }
-
-                                    cate<-gsub("[^(가-힣ㄱ-ㅎㅏ-ㅣ)]","",cate)
-                                    title<-gsub('<meta property=\"og:title\"\t\t\tcontent=\"',"",title)
-                                    title<-gsub('\"/>',"",title)
-                                    author<-gsub('<meta property=\"og:article:author\"\tcontent=\"',"",author)
-                                    author<-gsub('\"/>',"",author)
-                                    author<-gsub("네이버TV연예","",author)
-                                    author<-gsub("[[:punct:]]", "", author)
-                                    author<-gsub(" ", "", author)
-
-                                    postTime<-gsub("\t","",postTime)
-                                    postTime<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",postTime)
-                                    postTime<-gsub("기사입력","",postTime)
-                                    if (length(chgTime)!=0)
-                                        {
-                                            chgTime<-gsub("\t","",chgTime)
-                                            chgTime<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",chgTime)
-                                            chgTime<-gsub("최종수정","",chgTime)
-                                        }
-                                    else
-                                        {
-                                            chgTime<-postTime
-                                        }
-                                    con<-gsub("\t","",con)
-                                    con<-gsub("<!--(([^-]*)|([-]{1})|([-]{2})([^>]{1}))*?-->","",con)
-                                    con<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",con)
-                                    if(length(grep("script",con))==2)
-                                        {
-                                            con<-con[c(-grep("script",con)[1]:-grep("script",con)[2])]
-                                        }
-                                    con<-paste(con, collapse = "")
-                                    con<-gsub("<!--.*-->","",con)
-                                    
-                                    options(warn=-1)
-                                    listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
-                                    if(!grepl("Read error",listTem))
-                                        {
-                                           
-                                            dataAll<-rbind(dataAll,listTem)
-                                            print(paste(cate,j,j/dd*100,"%"))
-                                        }
-                                    else
-                                        {
-                                            print(paste("This link is not right.",tt))
-                                            print(paste(cate,j,j/dd*100,"% above"))
                                             errorURL<<-c(errorURL,tt)
                                         }
-                                    options(warn=1)
-                                    Sys.sleep(CTime)
+                                    else
+                                        {
+
+
+                                            tst<-gsub('&nbsp;',"",tst)
+                                            tst<-gsub('&lt;',"<",tst)
+                                            tst<-gsub('&gt;',">",tst)
+                                            tst<-gsub('&amp;',"&",tst)
+                                            tst<-gsub('&quot;','"',tst)
+                                            tst<-gsub('&#039;',"'",tst)
+                                            tst<-gsub('&#034','"',tst)
+
+                                            cate<-"TV연애"
+                                            title<-tst[grep("og:title",tst)]
+                                            author<-tst[grep(":author",tst)]
+                                            postTime<-tst[grep("기사입력",tst)]
+                                            chgTime<-tst[grep("최종수정",tst)]
+                                            if(length(grep("본문 내용",tst))>1)
+                                                {
+                                                    con<-tst[grep("본문 내용",tst)[1]:grep("본문 내용",tst)[2]]
+                                                }
+                                            else
+                                                {
+                                                    con<-tst[grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)[ grep("[(가-힣ㄱ-ㅎㅏ-ㅣ)]",tst)>grep("본문 내용",tst)][1]]
+                                                }
+# end if
+
+                                            cate<-gsub("[^(가-힣ㄱ-ㅎㅏ-ㅣ)]","",cate)
+                                            title<-gsub('<meta property=\"og:title\"\t\t\tcontent=\"',"",title)
+                                            title<-gsub('\"/>',"",title)
+                                            author<-gsub('<meta property=\"og:article:author\"\tcontent=\"',"",author)
+                                            author<-gsub('\"/>',"",author)
+                                            author<-gsub("네이버TV연예","",author)
+                                            author<-gsub("[[:punct:]]", "", author)
+                                            author<-gsub(" ", "", author)
+
+                                            postTime<-gsub("\t","",postTime)
+                                            postTime<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",postTime)
+                                            postTime<-gsub("기사입력","",postTime)
+                                            if (length(chgTime)!=0)
+                                                {
+                                                    chgTime<-gsub("\t","",chgTime)
+                                                    chgTime<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",chgTime)
+                                                    chgTime<-gsub("최종수정","",chgTime)
+                                                }
+                                            else
+                                                {
+                                                    chgTime<-postTime
+                                                }
+# end if
+                                            con<-gsub("\t","",con)
+                                            con<-gsub("<!--(([^-]*)|([-]{1})|([-]{2})([^>]{1}))*?-->","",con)
+                                            con<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",con)
+                                            if(length(grep("script",con))==2)
+                                                {
+                                                    con<-con[c(-grep("script",con)[1]:-grep("script",con)[2])]
+                                                }
+# end if
+                                            con<-paste(con, collapse = "")
+                                            con<-gsub("<!--.*-->","",con)
+
+                                            options(warn=-1)
+                                            listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
+                                            if(!grepl("Read error",listTem))
+                                                {
+
+                                                    dataAll<-rbind(dataAll,listTem)
+                                                    print(paste(cate,j,j/dd*100,"%"))
+                                                }
+                                            else
+                                                {
+                                                    print(paste("This link is not right.",tt))
+                                                    print(paste(cate,j,j/dd*100,"% above"))
+                                                    errorURL<<-c(errorURL,tt)
+                                                }
+# end if
+                                            options(warn=1)
+                                            Sys.sleep(CTime)
+                                        }
+# end if
                                 }
+# end if
                         }
+# end for
                 }
+# end if
 
             if(selectWeather==1)
                 {
@@ -946,69 +1078,98 @@ getNaverNews <- function()
                                             tst<-tryCatch(readLines(tt,warn=F,encoding="UTF-8"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
                                             ncnt<-ncnt+1
                                         }
+# end while
                                 }
+# end if
                             options(warn=1)
-                            if(ncnt==3)
+                            charSet<-length(grep("<meta charset=",tst))
+                            if(charSet!=0)
                                 {
-                                    errorURL<<-c(errorURL,tt)
+                                    options(warn=-1)
+                                    tst<-tryCatch(readLines(tt,warn=F,encoding="EUC-KR"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
+                                    if(grepl("Read error",tst))
+                                        {
+                                            while(ncnt<3)
+                                                {
+                                                    Sys.sleep(1)
+                                                    tst<-tryCatch(readLines(tt,warn=F,encoding="EUC-KR"),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
+                                                    ncnt<-ncnt+1
+                                                }
+# end while
+                                        }
+# end if
+                                    options(warn=1)
+
                                 }
                             else
                                 {
-                                    tst<-gsub('&nbsp;',"",tst)
-                                    tst<-gsub('&lt;',"<",tst)
-                                    tst<-gsub('&gt;',">",tst)
-                                    tst<-gsub('&amp;',"&",tst)
-                                    tst<-gsub('&quot;','"',tst)
-                                    tst<-gsub('&#039;',"'",tst)
-                                    tst<-gsub('&#034','"',tst)
 
-                                    cate<-tst[grep("<title>",tst)]
-                                    title<-tst[grep('<h4 class="new_end_tit">',tst)]
-                                    author<-tst[grep('<dd class="date">',tst)]
-                                    postTime<-tst[grep('<dd class="date">',tst)]
-                                    con<-tst[grep('<div class="data">',tst)+1]
-
-                                    cate<-gsub("[^(가-힣ㄱ-ㅎㅏ-ㅣ)]","",cate)
-                                    cate<-gsub(" ","",cate)
-                                    cate<-gsub("네이버","",cate)
-                                    title<-gsub('\t',"",title)
-                                    title<-gsub("<[^>]*>","",title)
-
-                                    author<-gsub("\t","",author)
-                                    author<-gsub('<[^>]*>',"",author)
-                                    author<-gsub("\\[","",author)
-                                    author<-gsub(" ]","",author)
-                                    author<-gsub("(19|20)..-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1]) (0[1-9]|1[1-9]|2[01234]):(0[1-9]|1[1-9]|2[1-9]|3[1-9]|4[1-9]|5[1-9]|6[1-9]):(0[1-9]|1[1-9]|2[1-9]|3[1-9]|4[1-9]|5[1-9]|6[1-9])","",author)
-                                    author<-gsub(" ","",author)
-
-                                    postTime<-unlist(strsplit(postTime, ' '))
-                                    postTime<-paste(postTime[grep("(19|20)..-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])",postTime)],postTime[grep("(0[1-9]|1[1-9]|2[01234]):(0[1-9]|1[1-9]|2[1-9]|3[1-9]|4[1-9]|5[1-9]|6[1-9]):(0[1-9]|1[1-9]|2[1-9]|3[1-9]|4[1-9]|5[1-9]|6[1-9])",postTime)])
-                                    chgTime<-postTime
-
-                                    con<-gsub("\t","",con)
-                                    con<-gsub("<ul>.*</ul>","",con)
-                                    con<-gsub("<h3>.*</h3>","",con)
-                                    con<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",con)
-
-                                    options(warn=-1)
-                                    listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
-                                    if(!grepl("Read error",listTem))
+                                    if(ncnt==3)
                                         {
-                                           
-                                            dataAll<-rbind(dataAll,listTem)
-                                            print(paste(cate,j,j/dd*100,"%"))
+                                            errorURL<<-c(errorURL,tt)
                                         }
                                     else
                                         {
-                                            print(paste("This link is not right.",tt))
-                                            print(paste(cate,j,j/dd*100,"% above"))
-                                            errorURL<<-c(errorURL,tt)
+                                            tst<-gsub('&nbsp;',"",tst)
+                                            tst<-gsub('&lt;',"<",tst)
+                                            tst<-gsub('&gt;',">",tst)
+                                            tst<-gsub('&amp;',"&",tst)
+                                            tst<-gsub('&quot;','"',tst)
+                                            tst<-gsub('&#039;',"'",tst)
+                                            tst<-gsub('&#034','"',tst)
+
+                                            cate<-tst[grep("<title>",tst)]
+                                            title<-tst[grep('<h4 class="new_end_tit">',tst)]
+                                            author<-tst[grep('<dd class="date">',tst)]
+                                            postTime<-tst[grep('<dd class="date">',tst)]
+                                            con<-tst[grep('<div class="data">',tst)+1]
+
+                                            cate<-gsub("[^(가-힣ㄱ-ㅎㅏ-ㅣ)]","",cate)
+                                            cate<-gsub(" ","",cate)
+                                            cate<-gsub("네이버","",cate)
+                                            title<-gsub('\t',"",title)
+                                            title<-gsub("<[^>]*>","",title)
+
+                                            author<-gsub("\t","",author)
+                                            author<-gsub('<[^>]*>',"",author)
+                                            author<-gsub("\\[","",author)
+                                            author<-gsub(" ]","",author)
+                                            author<-gsub("(19|20)..-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1]) (0[0-9]|1[0-9]|2[01234]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])","",author)
+                                            author<-gsub(" ","",author)
+
+                                            postTime<-unlist(strsplit(postTime, ' '))
+                                            postTime<-paste(postTime[grep("(19|20)..-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])",postTime)],postTime[grep("(0[0-9]|1[0-9]|2[01234]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]):(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])",postTime)])
+                                            chgTime<-postTime
+
+                                            con<-gsub("\t","",con)
+                                            con<-gsub("<ul>.*</ul>","",con)
+                                            con<-gsub("<h3>.*</h3>","",con)
+                                            con<-gsub("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>","",con)
+
+                                            options(warn=-1)
+                                            listTem<-tryCatch(data.frame(category=cate,title=title,author=author,postTime=postTime,chgTime=chgTime,contents=con),  error = function(e) print("Read error."))
+                                            if(!grepl("Read error",listTem))
+                                                {
+
+                                                    dataAll<-rbind(dataAll,listTem)
+                                                    print(paste(cate,j,j/dd*100,"%"))
+                                                }
+                                            else
+                                                {
+                                                    print(paste("This link is not right.",tt))
+                                                    print(paste(cate,j,j/dd*100,"% above"))
+                                                    errorURL<<-c(errorURL,tt)
+                                                }
+# end if
+                                            options(warn=1)
+                                            Sys.sleep(CTime)
                                         }
-                                    options(warn=1)
-                                    Sys.sleep(CTime)
+# end if
                                 }
+# end for
                         }
-}
+                }
+# end if
 
 
 
