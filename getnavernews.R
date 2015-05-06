@@ -6,7 +6,7 @@ getNaverNews <- function()
 
     if(collectMode==1)
         {
-            CTime=0.01
+            CTime=0
         }
           else
         {
