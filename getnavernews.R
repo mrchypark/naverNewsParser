@@ -6,7 +6,7 @@ getNaverNews <- function()
 
     if(collectMode==1)
         {
-            CTime=0.01
+            CTime=0.001
         }
           else
         {
@@ -33,7 +33,8 @@ getNaverNews <- function()
         }
 # end while
 
-    print("1: politics 2: economy 3: society 4: culture 5: world news 6: IT/science 7: sports 8: entertainment 9: weather")
+    print("1: politics 2: economy 3: society 4: culture 5: world news")
+    print("6: science 7: IT 8: sports 9: entertainment 10: weather")
     print("If you don't enter 1 or 2, it will be done with nothing. Thank you.")
     selectAll <- readline(prompt="Do you want colect all categories?(yes:1, no:2): ")
     if(selectAll!=1)
@@ -43,10 +44,12 @@ getNaverNews <- function()
             selectSociety <- readline(prompt="Do you want society category?(yes:1, no:2): ")
             selectCulture <- readline(prompt="Do you want culture category?(yes:1, no:2): ")
             selectWorld <- readline(prompt="Do you want world news category?(yes:1, no:2): ")
-            selectScience <- readline(prompt="Do you want IT/science category?(yes:1, no:2): ")
+            selectScience <- readline(prompt="Do you want science category?(yes:1, no:2): ")
+            selectIT <- readline(prompt="Do you want IT category?(yes:1, no:2): ")
             selectSports <- readline(prompt="Do you want sports category?(yes:1, no:2): ")
             selectEntertain <- readline(prompt="Do you want entertainment category?(yes:1, no:2): ")
             selectWeather <- readline(prompt="Do you want weather category?(yes:1, no:2): ")
+            #selectFinance <- readline(prompt="Do you want finance category?(yes:1, no:2): ")
         }
     else
         {
@@ -56,9 +59,11 @@ getNaverNews <- function()
             selectCulture<-1
             selectWorld<-1
             selectScience<-1
+            selectIT<-1
             selectSports<-1
             selectEntertain<-1
             selectWeather<-1
+            selectFinance<-1
         }
 # end if
 
@@ -78,6 +83,7 @@ getNaverNews <- function()
     list07<-list()
     list08<-list()
     list09<-list()
+    list10<-list()
 
     if(selectPolitics==1)
         {
@@ -461,7 +467,7 @@ getNaverNews <- function()
     if(selectScience==1)
         {
 
-            print("Start IT/science part.")
+            print("Start science part.")
 
             for(j in 0:end)
                 {
@@ -534,6 +540,83 @@ getNaverNews <- function()
         }
 # end if
 
+if(selectIT==1)
+        {
+
+            print("Start IT part.")
+
+            for(j in 0:end)
+                {
+                    dd<-as.Date(j, origin = startDate)
+                    kk<-gsub('-',"",as.character(dd))
+                    len<-0
+                    lennow<-1
+                    i<-1
+                    while(len!=lennow)
+                        {
+
+                            len<-lennow
+                            ncnt<-1
+
+                            options(warn=-1)
+                            test<-tryCatch(eval(parse(text=paste0("readLines('http://news.naver.com/main/list.nhn?sid2=230&sid1=105&mid=shm&mode=LS2D&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
+                            if(grepl("Read error",test))
+                                {
+                                    while(ncnt>3)
+                                        {
+                                            Sys.sleep(1)
+                                            test<-tryCatch(eval(parse(text=paste0("readLines('http://news.naver.com/main/list.nhn?sid2=230&sid1=105&mid=shm&mode=LS2D&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
+                                            ncnt<-ncnt+1
+                                        }
+# end while
+                                }
+# end if
+                            options(warn=1)
+
+                            test<-test[500:1000]
+                            test<-test[-grep("img",test)]
+                            listif<-unique(gsub("\t","",test[grep("href=\"http",test)]))
+                            list07<-c(list07,listif)
+
+                            Sys.sleep(CTime)
+                            list07<-unlist(list07)
+                            list07<-unique(list07)
+                            lennow<-length(list07)
+                            print(paste("I'm scraping IT/Science part",lennow,"links. I'm at",kk,"date,",i,"page."))
+                            i<-i+1
+
+                        }
+# end while
+                }
+# end for
+
+            list07<-gsub('<a href=\"','',list07)
+            list07<-gsub('\">','',list07)
+            list07<-substr(list07,1,108)
+            if(length(grep("hot",list07))>0)
+                {
+                    list07<-list07[-grep("hot",list07)]
+                }
+# end if
+            if(length(grep("endic",list07))>0)
+                {
+                    list07<-list07[-grep("endic",list07)]
+                }
+# end if
+            if(length(grep("target",list07))>0)
+                {
+                    list07<-list07[-grep("target",list07)]
+                }
+# end if
+            if(length(grep("class",list07))>0)
+                {
+                    list07<-list07[-grep("class",list07)]
+                }
+# end if
+        }
+# end if
+
+
 
     if(selectSports==1)
         {
@@ -571,12 +654,12 @@ getNaverNews <- function()
                             test<-test[698:1300]
                             test<-test[grep("<tr><td><a href=\"",test)]
                             listif<-paste0("http://sports.news.naver.com/", substr(test, 35, 128))
-                            list07<-c(list07,listif)
+                            list08<-c(list08,listif)
 
                             Sys.sleep(CTime)
-                            list07<-unlist(list07)
-                            list07<-unique(list07)
-                            lennow<-length(list07)
+                            list08<-unlist(list08)
+                            list08<-unique(list08)
+                            lennow<-length(list08)
                             print(paste("I'm scraping sports part",lennow,"links. I'm at",kk,"date,",i,"page."))
                             i<-i+1
 
@@ -587,8 +670,8 @@ getNaverNews <- function()
         }
 # end if
 
-    list07Len<-length(list07)
-list07<-list07[1:list07Len-1]
+    list08Len<-length(list08)
+    list08<-list08[1:list08Len-1]
 
     if(selectEntertain==1)
         {
@@ -625,12 +708,12 @@ list07<-list07[1:list07Len-1]
 
                             test<-test[grep('class="tit"',test)]
                             listif<-paste0("http://entertain.naver.com", substr(test, 12, 39))
-                            list08<-c(list08,listif)
+                            list09<-c(list09,listif)
 
                             Sys.sleep(CTime)
-                            list08<-unlist(list08)
-                            list08<-unique(list08)
-                            lennow<-length(list08)
+                            list09<-unlist(list09)
+                            list09<-unique(list09)
+                            lennow<-length(list09)
                             print(paste("I'm scraping entertainment part",lennow,"links. I'm at",kk,"date,",i,"page."))
                             i<-i+1
 
@@ -641,8 +724,8 @@ list07<-list07[1:list07Len-1]
         }
 # end if
 
-    list08Len<-length(list08)
-list08<-list08[1:list08Len-1]
+    list09Len<-length(list09)
+    list09<-list09[1:list09Len-1]
 
     if(selectWeather==1)
         {
@@ -678,12 +761,12 @@ list08<-list08[1:list08Len-1]
                         test<-gsub('\">',"",test)
                         test<-paste("http://weather.naver.com/news/",test)
                         listif<-gsub(' ',"",test)
-                        list09<-c(list09,listif)
+                        list10<-c(list10,listif)
 
                         Sys.sleep(CTime)
-                        list09<-unlist(list09)
-                        list09<-unique(list09)
-                        lennow<-length(list09)
+                        list10<-unlist(list10)
+                        list10<-unique(list10)
+                        lennow<-length(list10)
                         print(paste("I'm scraping weather part",lennow,"links. I'm at",kk,"date."))
 
 
@@ -693,12 +776,70 @@ list08<-list08[1:list08Len-1]
 # end if
 
 
-    listAll<-c(list01,list02,list03,list04,list05,list06,list07,list08,list09)
+    if(selectFinance==100)
+        {
+
+            print("Start Finance part.")
+
+            for(j in 0:end)
+                {
+                    flist<-c(401,402,403,404,406,429)
+                    dd<-as.Date(j, origin = startDate)
+                    kk<-gsub('-',"",as.character(dd))
+                    len<-0
+                    lennow<-1
+                    i<-1
+                    for(l in 1:6)
+                        {   fnum<-flist[l]
+                            len<-0
+                            lennow<-1
+                            while(len!=lennow)
+                                {
+
+                                    len<-lennow
+                                    ncnt<-1
+                                    options(warn=-1)
+
+                                    test<-tryCatch(eval(parse(text=paste0("readLines('http://finance.naver.com/news/news_list.nhn?mode=LSS3D&section_id=101&section_id2=258&section_id3=",fnum,"&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
+                                    if(grepl("Read error",test))
+                                        {
+                                            while(ncnt>3)
+                                                {
+                                                    Sys.sleep(1)
+                                                    test<-tryCatch(eval(parse(text=paste0("readLines('http://finance.naver.com/news/news_list.nhn?mode=LSS3D&section_id=101&section_id2=258&section_id3=",fnum,"&date=",kk,"&page=",i,"',warn=F)"))),  error = function(e) print("Read error, Please wait. It will be start after 1 sec."))
+                                                    ncnt<-ncnt+1
+                                                }
+# end while
+                                        }
+# end if
+                                    options(warn=1)
+
+                                    test<-c(test[grep('<dt class="articleSubject">',test)+1],test[grep('<dd class="articleSubject">',test)+1])
+                                    test<-unique(gsub("\t","",test))
+                                    listif<-unique(substr(test,10,150))
+                                    list10<-c(list10,listif)
+
+                                    Sys.sleep(CTime)
+                                    list10<-unlist(list10)
+                                    list10<-unique(list10)
+                                    lennow<-length(list10)
+                                    print(paste("I'm scraping finance part",lennow,"links. I'm at",kk,"date,",i,"page.",fnum))
+                                    i<-i+1
+
+                                }
+# end while
+                        }
+# end for
+                }
+
+        }
+
+    listAll<-c(list01,list02,list03,list04,list05,list06,list07,list08,list09,list10)
     write.csv(listAll,"listURL.csv",row.names=F)
     print(paste("We get",length(listAll),"links!"))
     print(paste("Get url list is Done! It is saved at",getwd(),"named listURL.csv."))
     listLen<-length(listAll)
-    listAll<-c(list01,list02,list03,list04,list05,list06)
+    listAll<-c(list01,list02,list03,list04,list05,list06,list07)
 
 ##########################################################################################################
 ########################                                                     #############################
@@ -712,7 +853,7 @@ list08<-list08[1:list08Len-1]
     dd<-length(listAll)
     if(listLen>0)
 # end if
-    {
+        {
             if(length(listAll)>0)
                 {
                     for(j in 1:dd)
