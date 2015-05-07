@@ -6,7 +6,7 @@ getNaverNews <- function()
 
     if(collectMode==1)
         {
-            CTime=0.001
+            CTime=0
         }
           else
         {
@@ -49,7 +49,7 @@ getNaverNews <- function()
             selectSports <- readline(prompt="Do you want sports category?(yes:1, no:2): ")
             selectEntertain <- readline(prompt="Do you want entertainment category?(yes:1, no:2): ")
             selectWeather <- readline(prompt="Do you want weather category?(yes:1, no:2): ")
-            #selectFinance <- readline(prompt="Do you want finance category?(yes:1, no:2): ")
+            selectFinance <- readline(prompt="Do you want finance category?(yes:1, no:2): ")
         }
     else
         {
