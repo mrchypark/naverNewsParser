@@ -5,7 +5,7 @@ R 콘솔에 source("getnavernews.R",encoding="UTF-8")을 입력하면 시작합�
 8개 카테고리 모두 긁어올 것인지 물어봅니다. 1을 입력하면 모두 이고 나머지는 각 카테고리를 다시 질문합니다.<br>
 코드 관련 내용은 맨 하단에 있습니다.<br>
 *최종 작업하신 결과물에 https://github.com/mrchypark/naverNewsParser/ 가 사용 출처임을 밝혀주시면 정말 감사하겠습니다.<br>
-*최종 결과물도 보내주시면 특히 보람찰 것 같습니다.<br>
+*최종 결과물도 보내주시면 특히 보람찰 것 같습니다.(문의도 환영) to mrchypark@gmail.com<br>
 <br>
 # v0.33<br>
 IT/과학 카테고리를 IT와 과학 카테고리로 분리하였습니다..<br>
