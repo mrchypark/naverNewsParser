@@ -1,3 +1,6 @@
+# mrchypark/N2H4 로 이전합니다.
+패키지 식으로 변경한 N2H4 패키지로 이전합니다.
+
 # 사용법
 getwd()로 확인한 작업공간에 getnavernews.R파일을 저장합니다.<br>
 R 콘솔에 source("getnavernews.R",encoding="UTF-8")을 입력하면 시작합니다.<br>
